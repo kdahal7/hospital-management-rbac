@@ -157,7 +157,10 @@ http://localhost:8081/api/v1/swagger-ui/index.html
 ## Screenshots
 
 ### USER Dashboard
-![USER Dashboard](screenshots/user-dashboard.png)
+
+<img width="1919" height="847" alt="Screenshot 2026-03-09 172224" src="https://github.com/user-attachments/assets/8a64f6b4-b712-41a0-b9aa-fd750f2ceb8d" />
 
 ### ADMIN Dashboard
-![ADMIN Dashboard](screenshots/admin-dashboard.png)
+
+<img width="1919" height="1002" alt="Screenshot 2026-03-09 172254" src="https://github.com/user-attachments/assets/4a0a4b49-4478-49ab-80bd-eaa40dbb8efc" />
+
