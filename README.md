@@ -156,6 +156,13 @@ http://localhost:8081/api/v1/swagger-ui/index.html
 
 ## Screenshots
 
+### Regitration Page
+<img width="1919" height="992" alt="Screenshot 2026-03-09 181038" src="https://github.com/user-attachments/assets/f4f21dc2-2dfe-432e-b24c-f16eb5c04e9c" />
+
+### Login Page
+<img width="1918" height="988" alt="image" src="https://github.com/user-attachments/assets/abc75b29-c2f2-4a2e-9b97-07e58b3655b9" />
+
+
 ### USER Dashboard
 
 <img width="1919" height="847" alt="Screenshot 2026-03-09 172224" src="https://github.com/user-attachments/assets/8a64f6b4-b712-41a0-b9aa-fd750f2ceb8d" />
