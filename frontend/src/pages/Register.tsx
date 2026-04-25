@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate, Link } from 'react-router-dom'
 import { signup as signupApi } from '../api/auth'
 import type { Role } from '../types/auth'
+import { getApiErrorMessage } from '../utils/getApiErrorMessage'
 
 interface RegisterForm {
   name: string
@@ -40,6 +41,10 @@ export default function Register() {
     })
   }
 
+  const errorMessage = mutation.isError
+    ? getApiErrorMessage(mutation.error, 'Registration failed. Please try again.')
+    : ''
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -47,7 +52,7 @@ export default function Register() {
 
         {mutation.isError && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm">
-            Registration failed. The email may already be in use.
+            {errorMessage}
           </div>
         )}
 

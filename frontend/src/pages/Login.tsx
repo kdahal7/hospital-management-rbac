@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { login as loginApi } from '../api/auth'
 import { useAuth } from '../context/AuthContext'
 import type { LoginRequest } from '../types/auth'
+import { getApiErrorMessage } from '../utils/getApiErrorMessage'
 
 export default function Login() {
   const { login } = useAuth()
@@ -27,6 +28,10 @@ export default function Login() {
     mutation.mutate(data)
   }
 
+  const errorMessage = mutation.isError
+    ? getApiErrorMessage(mutation.error, 'Invalid email or password. Please try again.')
+    : ''
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -34,7 +39,7 @@ export default function Login() {
 
         {mutation.isError && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm">
-            Invalid email or password. Please try again.
+            {errorMessage}
           </div>
         )}
 
