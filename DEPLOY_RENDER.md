@@ -20,14 +20,38 @@ Render deploys from a GitHub repo.
 
 Create a new Web Service from your GitHub repo and use:
 
-- Root Directory: `hospitalManagement`
-- Build Command: `./mvnw clean package -DskipTests`
+- Runtime/Environment: `Docker` (recommended)
+- Root Directory: leave empty (or `.`)
+- Build Command: leave empty when using Docker
+- Start Command: leave empty when using Docker
+
+If you use Docker, add a `Dockerfile` at repo root:
+
+```dockerfile
+FROM eclipse-temurin:17-jdk AS build
+WORKDIR /app
+COPY . .
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/hospitalManagement-0.0.1-SNAPSHOT.jar app.jar
+CMD ["java","-jar","app.jar"]
+```
+
+If you do not use Docker:
+
+- Root Directory: leave empty (or `.`)
+- Build Command: `chmod +x mvnw; ./mvnw clean package -DskipTests`
 - Start Command: `java -jar target/hospitalManagement-0.0.1-SNAPSHOT.jar`
+
+Important: do not put build commands into Root Directory.
 
 Set Environment Variables in Render:
 
 - `SPRING_DATASOURCE_URL` = your Render Postgres JDBC URL
   - Example format: `jdbc:postgresql://<host>:5432/<db>`
+  - Do not use `postgresql://...` here
 - `SPRING_DATASOURCE_USERNAME` = your DB username
 - `SPRING_DATASOURCE_PASSWORD` = your DB password
 - `SPRING_JPA_HIBERNATE_DDL_AUTO` = `update`
@@ -51,9 +75,19 @@ Use frontend folder:
 
 Option B: Netlify / Vercel
 
+- Vercel Root Directory: `frontend`
 - Build command: `npm run build`
 - Output directory: `dist`
 - Env var: `VITE_API_BASE_URL=https://<backend-service>.onrender.com/api/v1`
+- Add `frontend/vercel.json` for SPA routes:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
 
 ## 5) Verify production flow
 
